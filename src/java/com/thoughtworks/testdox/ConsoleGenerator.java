@@ -19,7 +19,7 @@ public class ConsoleGenerator implements DocumentGenerator {
         out.println(name);
     }
     public void onTest(String name) {
-        System.out.println("    - " + name);
+        out.println("    - " + name);
     }
 
     public void endClass(String name) {

@@ -12,4 +12,6 @@ import java.io.File;
 public interface Generator {
     public void setInputFile(File file);
     public void generate();
+    void addGenerator(DocumentGenerator generator);
+
 }

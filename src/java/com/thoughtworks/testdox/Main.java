@@ -111,8 +111,12 @@ public class Main implements Generator {
             setTestDirectory(inputFile.getCanonicalPath());
             parse();
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use Options | File Templates.
+            e.printStackTrace();
         }
+    }
+
+    public void addGenerator(DocumentGenerator generator) {
+        gen.addGenerator(generator);
     }
 
     public void processArguments(String[] args) throws IOException {

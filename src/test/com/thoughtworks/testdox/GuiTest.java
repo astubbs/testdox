@@ -19,20 +19,11 @@ import com.thoughtworks.testdox.Gui;
  */
 public class GuiTest extends TestCase {
     private Gui gui;
-    private static JFileChooser selectSrcChooser = new JFileChooser() {
-        public File getSelectedFile() {
-            return selectedFile;
-        }
-
-        public int showOpenDialog(Component parent) throws HeadlessException {
-            return JFileChooser.APPROVE_OPTION;
-        }
-    };
-    private static File selectedFile = new File("src");
     private TestGenerator gen;
 
     protected void setUp() throws Exception {
         gen = new TestGenerator();
+        gui = new Gui("foo", gen);
     }
 
     protected void tearDown() throws Exception {
@@ -49,7 +40,6 @@ public class GuiTest extends TestCase {
             }
         };
 
-        gui = new Gui("foo", gen);
         gui.fileChooser = chooser;
         gui.browseButton.doClick();
         assertNotNull(gui.fileChooser);
@@ -64,8 +54,7 @@ public class GuiTest extends TestCase {
 
     public void testSelectedFileIsShownInTextField() {
 
-        gui = new Gui("foo", gen);
-        gui.fileChooser = selectSrcChooser;
+        gui.fileChooser = GuiTestUtil.selectSrcChooser;
         gui.browseButton.doClick();
 
         assertEquals("src", gui.path.getText());
@@ -90,9 +79,8 @@ public class GuiTest extends TestCase {
     }
 
     public void testGoButtonEnableUponUserFileSelection() {
-        gui = new Gui("foo", gen);
         assertFalse(gui.goButton.isEnabled());
-        gui.fileChooser = selectSrcChooser;
+        gui.fileChooser = GuiTestUtil.selectSrcChooser;
         gui.browseButton.doClick();
         assertTrue(gui.goButton.isEnabled());
     }
@@ -107,6 +95,10 @@ public class GuiTest extends TestCase {
         public void generate() {
         }
 
+        public void addGenerator(DocumentGenerator generator) {
+
+        }
+
         public File getFile() {
             return file;
         }
@@ -114,26 +106,33 @@ public class GuiTest extends TestCase {
 
     public void testClickGoButtonRunsIt() {
 
-        gui = new Gui("foo", gen);
         gui.path.setText("src");
         gui.goButton.setEnabled(true);
         gui.goButton.doClick();
 
-        assertEquals(selectedFile, gen.getFile());
+        assertEquals(GuiTestUtil.selectedFile, gen.getFile());
     }
 
 
     public void testGoButtonDisabledIfFileDoesNotExist() {
-        gui = new Gui("foo", gen);
         gui.path.setText("non-existent-file");
         assertFalse(gui.goButton.isEnabled());
     }
 
     public void testEnteringPathFreehandEnablesGoButtonAndMakesItDefault() throws IOException, InterruptedException {
-        gui = new Gui("foo", gen);
-        gui.path.setText(selectedFile.getCanonicalPath());
+        gui.path.setText(GuiTestUtil.selectedFile.getCanonicalPath());
         assertTrue(gui.goButton.isEnabled());
         assertTrue(gui.goButton.isDefaultButton());
     }
 
+    public void testConfiguredDocuemntGeneratorIsAddedToGenerators() throws IOException, InterruptedException {
+        MockDocumentGenerator testDocumentGenerator = new MockDocumentGenerator();
+        JLabel guiComponent = new JLabel();
+        MockDocumentGeneratorGui generatorGui = new MockDocumentGeneratorGui(testDocumentGenerator, guiComponent);
+        gui.addDocumentGeneratorGui(generatorGui);
+        assertTrue(guiComponent.isVisible());
+        gui.goButton.setEnabled(true);
+        gui.goButton.doClick();
+        assertTrue(generatorGui.createDocumentGeneratorWasCalled());
+    }
 }
