@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+    <classpathentry kind="src" path="src/java"/>
+    <classpathentry kind="src" path="src/test"/>
+    <classpathentry kind="var" path="JRE_LIB" sourcepath="JRE_SRC"/>
+    <classpathentry kind="var" path="MAVEN_REPO/qdox/jars/qdox-1.1.jar"/>
+    <classpathentry kind="var" path="JUNIT"/>
+    <classpathentry kind="output" path="target/classes"/>
+</classpath>

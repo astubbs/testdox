@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<project>
+
+    <pomVersion>3</pomVersion>
+
+    <name>TestDox</name>
+    <id>testdox</id>
+    <currentVersion>0.1</currentVersion>
+
+    <organization>
+        <name>Chris Stevenson</name>
+        <url>http://agiledox.sourceforge.net/index.html</url>
+    </organization>
+    <inceptionYear>2003</inceptionYear>
+    <package>biz.skizz.testdox</package>
+
+    <shortDescription>
+    	Creates simple documentation from test classes
+    </shortDescription>
+
+	<description>
+		<p>TestDox creates simple documentation from the method names in JUnit test cases.</p>
+		<p>For Example, a test class like:
+		<pre>
+			public class FooTest extends TestCase {
+				public void testIsASingleton() {}
+			}
+		</pre>
+		would generate:
+		<pre>
+			Test
+			- is a singleton
+		</pre>
+		</p>
+		
+	</description>
+
+    <url>http://maven.apache.org/</url>
+    <issueTrackingUrl/>
+    <siteAddress>shell.sourceforge.net</siteAddress>
+    <siteDirectory>/home/groups/a/ag/agiledox/htdocs</siteDirectory>
+    <distributionDirectory>/home/groups/a/ag/agiledox/htdocs/dist</distributionDirectory>
+			  
+<!--
+    <repository>
+        <connection>local:/home/cvs/cvsroot/testdox</connection>
+        <url />
+    </repository>							  
+-->
+
+    <developers>
+        <developer>
+            <name>Chris stevenson</name>
+            <id>skizz</id>
+            <email>chris@skizz.biz</email>
+            <organization>skizz</organization>
+        </developer>
+
+    </developers>
+
+    <dependencies>
+
+        <dependency>
+            <id>qdox</id>
+            <version>1.1</version>
+            <jnlp.jar>true</jnlp.jar>
+            <dist.jar>true</dist.jar>
+        </dependency>
+
+    </dependencies>
+
+    <reports>
+        <report>maven-changelog-plugin</report>
+        <report>maven-javadoc-plugin</report>
+	<report>maven-junit-report-plugin</report>
+    </reports>
+
+
+    <build>
+
+        <nagEmailAddress>
+            chris@skizz.plus.com
+        </nagEmailAddress>
+
+        <sourceDirectory>src/java</sourceDirectory>
+
+        <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+
+        <integrationUnitTestSourceDirectory/>
+
+        <aspectSourceDirectory/>
+
+        <!-- Unit test cases -->
+        <unitTest>
+            <includes>
+                <include>**/*Test.java</include>
+            </includes>
+            <resources>
+            </resources>
+
+        </unitTest>
+
+        <!-- J A R  R E S O U R C E S -->
+        <!-- Resources that are packaged up inside the JAR file -->
+        <resources>
+        </resources>
+
+        <!-- Integration unit test cases -->
+        <integrationUnitTest/>
+
+        <jars>
+
+        </jars>
+
+    </build>
+    
+</project>
