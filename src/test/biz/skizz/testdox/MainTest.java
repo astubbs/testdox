@@ -6,6 +6,8 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import javax.swing.*;
+
 public class MainTest extends TestCase {
     private MockDocumentGenerator gen;
     private Main main;
@@ -62,22 +64,29 @@ public class MainTest extends TestCase {
         assertFalse(descriptions.contains("p"));
     }
     
-    public void testMainShowsUsageIfNoParameters() {
-    	PrintStream oldErr = System.err;
-		String result = null;
-    	try {
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			System.setErr(new PrintStream(out));
-			Main.main(new String[]{});
-			result = out.toString();
-		} 
-		finally {
-			System.setErr(oldErr);
-		}
-    	assertNotNull(result);
-    	assertTrue(result.indexOf(Main.class.getName()) >= 0 );
-    	
-    	
+//    public void testMainShowsUsageIfNoParameters() {
+//    	PrintStream oldErr = System.err;
+//		String result = null;
+//    	try {
+//			ByteArrayOutputStream out = new ByteArrayOutputStream();
+//			System.setErr(new PrintStream(out));
+//			Main.main(new String[]{});
+//			result = out.toString();
+//		}
+//		finally {
+//			System.setErr(oldErr);
+//		}
+//    	assertNotNull(result);
+//    	assertTrue(result.indexOf(Main.class.getName()) >= 0 );
+//    }
+
+    public void testIfNoArgumentsShowGui() {
+        Main.main(new String[] {});
+        Gui frame = (Gui) Main.gui;
+        assertNotNull( frame );
+        assertTrue(frame.isVisible());
+        assertNotNull(frame.gen);
     }
+
 
 }

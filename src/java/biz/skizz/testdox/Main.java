@@ -9,18 +9,25 @@ import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaMethod;
 import com.thoughtworks.qdox.model.JavaSource;
 
+import javax.swing.*;
+
 /**
  * Simple usage:
  * 
  *
  */
-public class Main {
+public class Main implements Generator {
 
     private static String usage = 
-		"Generate simple test documentation from JUnit source files\n" +    	"Usage: {0} <source-directory>\n" +    	"\t<source-directory>: A source directory containing JUnit tests" +    	"\n" +    	"TestDox will generate documentation for test cases of the form *Test.java, *TestCase.java\n";
+		"Generate simple test documentation from JUnit source files\n" +
+    	"Usage: {0} <source-directory>\n" +
+    	"\t<source-directory>: A source directory containing JUnit tests" +
+    	"\n" +
+    	"TestDox will generate documentation for test cases of the form *Test.java, *TestCase.java\n";
 	String directory;
     private MultiplexingGenerator gen = new MultiplexingGenerator();
     private NamePrettifier prettifier = new NamePrettifier();
+    public static JFrame gui;
 
     public Main() {
         gen.addGenerator( new ConsoleGenerator() );
@@ -75,17 +82,24 @@ public class Main {
     }
 
     public static void main(String[] args) {
-    	if ( args.length == 0 ) {
-    		String message = MessageFormat.format(usage, new String[] {Main.class.getName()} );
-    		System.err.println(message);
-    		return;	
-    	}
-    	
+
+        Generator main = new Main();
+        if ( args.length == 0 ) {
+            gui = new Gui("Test Docs", main);
+            gui.show();
+            return;
+//    		String message = MessageFormat.format(usage, new String[] {Main.class.getName()} );
+//    		System.err.println(message);
+//    		return;
+        }
         File file = new File(args[0]);
-        Main main = new Main();
+        main.generate(file);
+    }
+
+    public void generate(File file) {
         try {
-            main.setTestDirectory(file.getCanonicalPath());
-            main.parse();
+            setTestDirectory(file.getCanonicalPath());
+            parse();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use Options | File Templates.
         }
