@@ -141,9 +141,7 @@ public class Gui extends JFrame {
     }
 
     private void doBrowseForFile() {
-        if (fileChooser == null) {
-            fileChooser = new JFileChooser();
-        }
+        initializeFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         if (fileChooser.showOpenDialog(this) != JFileChooser.CANCEL_OPTION) {
             try {
@@ -152,6 +150,15 @@ public class Gui extends JFrame {
             } catch (IOException e) {
                 System.err.println("Could not locate directory");
                 e.printStackTrace();
+            }
+        }
+    }
+
+    void initializeFileChooser() {
+        if (fileChooser == null) {
+            fileChooser = new JFileChooser();
+            if ( path.getText()!=null ) {
+                fileChooser.setSelectedFile(new File(path.getText()));
             }
         }
     }

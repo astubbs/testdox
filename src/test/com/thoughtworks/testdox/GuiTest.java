@@ -78,6 +78,9 @@ public class GuiTest extends TestCase {
         testSelectedDirectoryIsWrittenToPreferences();
         Gui gui = new Gui("second gui", gen);
         assertEquals(GuiTestUtil.selectedFile.getCanonicalPath(), gui.path.getText());
+        assertEquals(null, gui.fileChooser);
+        gui.initializeFileChooser();
+        assertEquals(GuiTestUtil.selectedFile.getCanonicalPath(), gui.fileChooser.getSelectedFile().getCanonicalPath());
     }
 
     public void testSelectedFileIsNotShownIfUserClickedCancel() {
