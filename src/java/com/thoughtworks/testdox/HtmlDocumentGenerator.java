@@ -12,11 +12,14 @@ public class HtmlDocumentGenerator implements DocumentGenerator {
 	public void startClass(String name) {
 		out.println("<h2>" + name + "</h2>");
 		out.println("<ul>");
+        out.flush();
 	}
 	public void endClass(String name) {
 		out.println("</ul>");
+        out.flush();
 	}
 	public void onTest(String name) {
 		out.println("<li>" + name + "</li>");
+        out.flush();
 	}
 }
