@@ -22,14 +22,18 @@
 		TestDox creates simple documentation from the method names in JUnit test cases.
 	</description>
 
-    <url>http://maven.apache.org/</url>
+    <url>http://agiledox.sourceforge.net</url>
     <issueTrackingUrl/>
     <siteAddress>shell.sourceforge.net</siteAddress>
     <siteDirectory>/home/groups/a/ag/agiledox/htdocs</siteDirectory>
     <distributionDirectory>/home/groups/a/ag/agiledox/htdocs/dist</distributionDirectory>
 			  
     <repository>
-        <connection>scm:pserver:anonymous@cvs.sourceforge.net:/cvsroot/agiledox/testdox</connection>
+	<!--
+	<connection>
+		scm:pserver:anonymous@cvs.sourceforge.net:/cvsroot/agiledox:testdox
+	</connection>
+	-->
         <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/agiledox</url>
     </repository>							  
 
@@ -48,6 +52,9 @@
         <dependency>
             <id>qdox</id>
             <version>1.2</version>
+	    <properties>
+		<jnlp.jar>true</jnlp.jar>
+	    </properties>
         </dependency>
 
     </dependencies>
