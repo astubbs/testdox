@@ -99,6 +99,10 @@ public class GuiTest extends TestCase {
 
         }
 
+        public void reset() {
+
+        }
+
         public File getFile() {
             return file;
         }
@@ -134,5 +138,19 @@ public class GuiTest extends TestCase {
         gui.goButton.setEnabled(true);
         gui.goButton.doClick();
         assertTrue(generatorGui.createDocumentGeneratorWasCalled());
+    }
+
+    public void testUnConfiguredDocuemntGeneratorIsNotAddedToGenerators() throws IOException, InterruptedException {
+        MockDocumentGenerator testDocumentGenerator = new MockDocumentGenerator();
+        JLabel guiComponent = new JLabel();
+        MockDocumentGeneratorGui generatorGui = new MockDocumentGeneratorGui(testDocumentGenerator, guiComponent) {
+            public boolean isConfigured() {
+                return false;
+            }
+        };
+        gui.addDocumentGeneratorGui(generatorGui);
+        gui.goButton.setEnabled(true);
+        gui.goButton.doClick();
+        assertFalse(generatorGui.createDocumentGeneratorWasCalled());
     }
 }

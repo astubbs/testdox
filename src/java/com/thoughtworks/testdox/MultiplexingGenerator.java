@@ -32,4 +32,8 @@ public class MultiplexingGenerator implements DocumentGenerator {
             generator.endClass(name);
         }
     }
+
+    public void clear() {
+        generators.clear();
+    }
 }

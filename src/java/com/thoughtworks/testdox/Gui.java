@@ -64,12 +64,15 @@ public class Gui extends JFrame {
 
     private ActionListener goActionListener = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
+            gen.reset();
             gen.setInputFile(new File(path.getText()));
             for (int i = 0; i < generatorGuis.size(); i++) {
                 DocumentGeneratorGui gui = (DocumentGeneratorGui) generatorGuis.get(i);
-                DocumentGenerator documentGenerator = gui.createDocumentGenerator();
-                if (documentGenerator!=null) {
-                    gen.addGenerator(documentGenerator);
+                if ( gui.isConfigured() ) {
+                    DocumentGenerator documentGenerator = gui.createDocumentGenerator();
+                    if (documentGenerator!=null) {
+                        gen.addGenerator(documentGenerator);
+                    }
                 }
             }
             gen.generate();
@@ -83,7 +86,7 @@ public class Gui extends JFrame {
     };
 
     private void setup() {
-        path = new JTextField(50);
+        path = new JTextField(40);
         path.getDocument().addDocumentListener(pathChangeListener);
         browseButton = new JButton("Browse");
         browseButton.addActionListener(browseActionListener);
@@ -105,12 +108,12 @@ public class Gui extends JFrame {
         pack();
     }
 
-    private JPanel makeBrowsePanel() {
+    private JComponent makeBrowsePanel() {
         JPanel panel = new JPanel();
-        FlowLayout flowLayout = new FlowLayout();
-        panel.setLayout(flowLayout);
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT));
         panel.add(path);
         panel.add(browseButton);
+        panel.setBorder(BorderFactory.createTitledBorder("Choose a directory containing JUnit tests"));
         return panel;
     }
 

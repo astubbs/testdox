@@ -119,6 +119,10 @@ public class Main implements Generator {
         gen.addGenerator(generator);
     }
 
+    public void reset() {
+        gen.clear();
+    }
+
     public void processArguments(String[] args) throws IOException {
 
         if ( args.length == 0 ) {
