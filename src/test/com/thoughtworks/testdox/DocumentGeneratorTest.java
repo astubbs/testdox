@@ -1,6 +1,8 @@
-package biz.skizz.testdox;
+package com.thoughtworks.testdox;
 
 import com.thoughtworks.qdox.model.JavaClass;
+import com.thoughtworks.testdox.DocumentGenerator;
+import com.thoughtworks.testdox.Main;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;

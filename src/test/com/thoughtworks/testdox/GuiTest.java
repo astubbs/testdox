@@ -1,4 +1,4 @@
-package biz.skizz.testdox;
+package com.thoughtworks.testdox;
 
 import junit.framework.TestCase;
 
@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+
+import com.thoughtworks.testdox.Generator;
+import com.thoughtworks.testdox.Gui;
 
 /**
  * Created by IntelliJ IDEA.

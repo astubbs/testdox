@@ -1,9 +1,13 @@
-package biz.skizz.testdox;
+package com.thoughtworks.testdox;
 
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaMethod;
 import com.thoughtworks.qdox.model.JavaSource;
+import com.thoughtworks.testdox.ConsoleGenerator;
+import com.thoughtworks.testdox.DocumentGenerator;
+import com.thoughtworks.testdox.Generator;
+import com.thoughtworks.testdox.Gui;
 
 import javax.swing.*;
 import java.io.File;

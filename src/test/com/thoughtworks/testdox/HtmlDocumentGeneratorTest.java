@@ -1,9 +1,11 @@
-package biz.skizz.testdox;
+package com.thoughtworks.testdox;
 
 import junit.framework.TestCase;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+
+import com.thoughtworks.testdox.HtmlDocumentGenerator;
 
 
 public class HtmlDocumentGeneratorTest extends TestCase {

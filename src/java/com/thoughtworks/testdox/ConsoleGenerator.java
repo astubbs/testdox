@@ -1,4 +1,5 @@
-package biz.skizz.testdox;
+package com.thoughtworks.testdox;
+
 
 public class ConsoleGenerator implements DocumentGenerator {
 

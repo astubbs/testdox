@@ -1,6 +1,7 @@
-package biz.skizz.testdox;
+package com.thoughtworks.testdox;
 
 import junit.framework.TestCase;
+import com.thoughtworks.testdox.NamePrettifier;
 
 public class NamePrettifierTest extends TestCase {
     private NamePrettifier namePrettifier;

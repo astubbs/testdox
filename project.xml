@@ -12,27 +12,14 @@
         <url>http://agiledox.sourceforge.net/index.html</url>
     </organization>
     <inceptionYear>2003</inceptionYear>
-    <package>biz.skizz.testdox</package>
+    <package>com.thoughtworks.testdox</package>
 
     <shortDescription>
     	Creates simple documentation from test classes
     </shortDescription>
 
 	<description>
-		<p>TestDox creates simple documentation from the method names in JUnit test cases.</p>
-		<p>For Example, a test class like:
-		<pre>
-			public class FooTest extends TestCase {
-				public void testIsASingleton() {}
-			}
-		</pre>
-		would generate:
-		<pre>
-			Test
-			- is a singleton
-		</pre>
-		</p>
-		
+		TestDox creates simple documentation from the method names in JUnit test cases.
 	</description>
 
     <url>http://maven.apache.org/</url>
@@ -41,12 +28,10 @@
     <siteDirectory>/home/groups/a/ag/agiledox/htdocs</siteDirectory>
     <distributionDirectory>/home/groups/a/ag/agiledox/htdocs/dist</distributionDirectory>
 			  
-<!--
     <repository>
-        <connection>local:/home/cvs/cvsroot/testdox</connection>
-        <url />
+        <connection>scm:pserver:anonymous@cvs.sourceforge.net:/cvsroot/agiledox/testdox</connection>
+        <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/agiledox</url>
     </repository>							  
--->
 
     <developers>
         <developer>
@@ -63,8 +48,6 @@
         <dependency>
             <id>qdox</id>
             <version>1.2</version>
-            <jnlp.jar>true</jnlp.jar>
-            <dist.jar>true</dist.jar>
         </dependency>
 
     </dependencies>

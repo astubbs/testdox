@@ -1,4 +1,6 @@
-package biz.skizz.testdox;
+package com.thoughtworks.testdox;
+
+import com.thoughtworks.testdox.DocumentGenerator;
 
 import java.util.ArrayList;
 import java.util.List;

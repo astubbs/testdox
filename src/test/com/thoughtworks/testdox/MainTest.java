@@ -1,8 +1,11 @@
-package biz.skizz.testdox;
+package com.thoughtworks.testdox;
 
 import junit.framework.TestCase;
 
 import java.util.List;
+
+import com.thoughtworks.testdox.Gui;
+import com.thoughtworks.testdox.Main;
 
 public class MainTest extends TestCase {
     private MockDocumentGenerator gen;

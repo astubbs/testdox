@@ -1,4 +1,4 @@
-package biz.skizz.testdox;
+package com.thoughtworks.testdox;
 
 import java.io.File;
 
