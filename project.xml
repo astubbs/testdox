@@ -29,13 +29,22 @@
     <distributionDirectory>/home/groups/a/ag/agiledox/htdocs/dist</distributionDirectory>
 			  
     <repository>
-	<!--
+<!--
 	<connection>
 		scm:pserver:anonymous@cvs.sourceforge.net:/cvsroot/agiledox:testdox
 	</connection>
-	-->
+-->
         <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/agiledox</url>
     </repository>							  
+
+<mailingLists>
+    <mailingList>
+          <name>agiledox-users</name>
+	  <subscribe>http://lists.sourceforge.net/lists/listinfo/agiledox-user</subscribe>
+	  <unsubscribe>http://lists.sourceforge.net/lists/listinfo/agiledox-user</unsubscribe>
+	  <archive>http://sourceforge.net/mailarchive/forum.php?forum=agiledox-user</archive>
+    </mailingList>
+</mailingLists>
 
     <developers>
         <developer>

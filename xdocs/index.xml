@@ -17,7 +17,7 @@
     public void testAReallyLongNameIsAGoodThing() {}
 }]]></source>
                 would generate the following :
-                <source><![CDATA[Test
+                <source><![CDATA[Foo
 - is a singleton
 - a really long name is a good thing]]></source>
             </p>
