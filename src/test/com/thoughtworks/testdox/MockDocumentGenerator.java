@@ -27,4 +27,11 @@ public class MockDocumentGenerator implements DocumentGenerator {
     public List getTestDescriptions(String className) {
         return (List) descriptions.get(className);
     }
+
+    public void startRun() {
+    }
+
+    public void endRun() {
+    }
+
 }

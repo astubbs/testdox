@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project
+    xmlns:j="jelly:core"
+    xmlns:define="jelly:define"
+    xmlns:doc="doc"
+    xmlns:ant="jelly:ant"
+    xmlns:simian="testdox">
+
+    <goal name="testdox">
+        <echo>Hello Maven Plug-in!</echo>
+    </goal>
+
+    <goal name="maven-testdox-report-plugin:register">
+        <doc:registerReport
+            name="TestDox"
+            link="testdox-report"
+            description="TestDox Report."/>
+    </goal>
+
+    <goal name="maven-testdox-report-plugin:deregister">
+        <doc:deregisterReport name="TestDox"/>
+    </goal>
+
+    <goal name="maven-testdox-report-plugin:report">
+
+        <ant:taskdef name="testdox" classname="com.thoughtworks.testdox.ant.TestDoxTask">
+            <ant:classpath>
+                <ant:pathelement location="${plugin.dir}"/>
+                <ant:pathelement location="${plugin.getDependencyPath('qdox')}"/>
+                <ant:pathelement location="${plugin.getDependencyPath('testdox')}"/>
+            </ant:classpath>
+        </ant:taskdef>
+
+        <ant:testdox
+            dir="${pom.build.unitTestSourceDirectory}"
+            output="${maven.build.dir}/generated-xdocs/testdox-report.xml"
+            />
+
+        <j:file name="${maven.build.dir}/generated-xdocs/simian-report.xml" prettyPrint="true">
+            <j:whitespace xmlns="dummy">
+
+                <document>
+                    <properties>
+                        <title>Simian Report</title>
+                    </properties>
+                    <body>
+                        <section name="foo">
+                            ${testdox.results}
+                        </section>
+                    </body>
+                </document>
+
+            </j:whitespace>
+        </j:file>
+    </goal>
+</project>

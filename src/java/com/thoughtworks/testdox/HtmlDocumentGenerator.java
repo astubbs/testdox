@@ -8,7 +8,7 @@ import java.io.PrintWriter;
  * 2003-08-12 out.flush() added at the suggestion of Mike Mason
  */
 public class HtmlDocumentGenerator implements DocumentGenerator {
-	PrintWriter out;
+	protected PrintWriter out;
 	public HtmlDocumentGenerator(PrintWriter out) {
 		this.out = out;
 	}
@@ -21,8 +21,16 @@ public class HtmlDocumentGenerator implements DocumentGenerator {
 		out.println("</ul>");
         out.flush();
 	}
-	public void onTest(String name) {
+
+    public void onTest(String name) {
 		out.println("<li>" + name + "</li>");
         out.flush();
 	}
+
+    public void startRun() {
+    }
+
+    public void endRun() {
+    }
+
 }

@@ -20,18 +20,16 @@ import java.text.MessageFormat;
 
 /**
  * Simple usage:
- *
- *
  */
 public class Main implements Generator {
 
     private static String usage =
-		"Generate simple test documentation from JUnit source files\n" +
-    	"Usage: {0} [-txt text-output-file] [-html html-output-file] <source-directory>\n" +
-    	"\t<source-directory>: A source directory containing JUnit tests" +
-    	"\n" +
-    	"TestDox will generate documentation for test cases of the form *Test.java, *TestCase.java\n";
-	String directory;
+            "Generate simple test documentation from JUnit source files\n" +
+            "Usage: {0} [-txt text-output-file] [-html html-output-file] <source-directory>\n" +
+            "\t<source-directory>: A source directory containing JUnit tests" +
+            "\n" +
+            "TestDox will generate documentation for test cases of the form *Test.java, *TestCase.java\n";
+    String directory;
     private MultiplexingGenerator gen = new MultiplexingGenerator();
     private NamePrettifier prettifier = new NamePrettifier();
     public static JFrame gui;
@@ -39,7 +37,7 @@ public class Main implements Generator {
     private File inputFile;
 
     public Main() {
-        gen.addGenerator( new ConsoleGenerator() );
+        gen.addGenerator(new ConsoleGenerator());
     }
 
     public void setTestDirectory(String directory) {
@@ -56,36 +54,38 @@ public class Main implements Generator {
         doSources(builder.getSources());
     }
 
-    private void doSources(JavaSource[] sources) {
+    void doSources(JavaSource[] sources) {
+        gen.startRun();
         for (int i = 0; i < sources.length; i++) {
             doClasses(sources[i].getClasses());
         }
+        gen.endRun();
     }
 
     void doClasses(JavaClass[] classes) {
         for (int j = 0; j < classes.length; j++) {
             JavaClass aClass = classes[j];
-            if ( isTestClass(aClass.getName())) {
-	    	String prettyName = prettifier.prettifyTestClass(aClass.getName());
+            if (isTestClass(aClass.getName())) {
+                String prettyName = prettifier.prettifyTestClass(aClass.getName());
                 gen.startClass(prettyName);
                 doMethods(aClass.getMethods());
-		gen.endClass(prettyName);
+                gen.endClass(prettyName);
             }
         }
     }
 
     boolean isTestClass(String className) {
-		return className.endsWith("Test") ||
-			className.endsWith("TestCase") ||
-			className.startsWith("Test");
-	}
+        return className.endsWith("Test") ||
+                className.endsWith("TestCase") ||
+                className.startsWith("Test");
+    }
 
-	private void doMethods(JavaMethod[] methods) {
+    private void doMethods(JavaMethod[] methods) {
         for (int k = 0; k < methods.length; k++) {
 
             String name = methods[k].getName();
             if (prettifier.isATestMethod(name)) {
-                gen.onTest( prettifier.prettifyTestMethod( name ) );
+                gen.onTest(prettifier.prettifyTestMethod(name));
             }
         }
     }
@@ -102,7 +102,7 @@ public class Main implements Generator {
     }
 
     private static void showUsage() {
-        String message = MessageFormat.format(usage, new String[] {Main.class.getName()} );
+        String message = MessageFormat.format(usage, new String[]{Main.class.getName()});
         System.err.println(message);
     }
 
@@ -125,7 +125,7 @@ public class Main implements Generator {
 
     public void processArguments(String[] args) throws IOException {
 
-        if ( args.length == 0 ) {
+        if (args.length == 0) {
             gui = new Gui("Test Docs", this);
             gui.show();
             return;
@@ -133,31 +133,28 @@ public class Main implements Generator {
 
         for (int i = 0; i < args.length; i++) {
             String arg = args[i];
-            if ( arg.equals("--help") || arg.equals("-h") ) {
+            if (arg.equals("--help") || arg.equals("-h")) {
                 showUsage();
                 return;
-            }
-            else if ( arg.equals("-txt") ) {
+            } else if (arg.equals("-txt")) {
                 i++;
                 checkParameterExists(args, i, "Expected a fileName to follow the -txt argument");
                 PrintStream out = new PrintStream(new FileOutputStream(new File(args[i]), true));
                 ConsoleGenerator textGenerator = new ConsoleGenerator(out);
                 gen.addGenerator(textGenerator);
-            }
-            else if ( arg.equals("-html") ) {
+            } else if (arg.equals("-html")) {
                 i++;
                 checkParameterExists(args, i, "Expected a fileName to follow the -html argument");
                 PrintWriter out = new PrintWriter(new FileWriter(new File(args[i]), true));
                 HtmlDocumentGenerator htmlGenerator = new HtmlDocumentGenerator(out);
                 gen.addGenerator(htmlGenerator);
-            }
-            else {
+            } else {
                 checkParameterExists(args, i, "Expected a fileName to follow the -txt argument");
                 setInputFile(new File(args[i]));
             }
         }
 
-        if ( inputFile == null ) {
+        if (inputFile == null) {
             throw new RuntimeException("Expected an inputFile");
         }
 
@@ -166,7 +163,7 @@ public class Main implements Generator {
     }
 
     private void checkParameterExists(String[] args, int i, String message) {
-        if ( args.length < i ) {
+        if (args.length < i) {
             throw new RuntimeException("Too few arguments: " + message);
         }
     }

@@ -28,4 +28,12 @@ public class ConsoleGenerator implements DocumentGenerator {
 
     public void endClass(String name) {
     }
+
+    public void startRun() {
+
+    }
+
+    public void endRun() {
+
+    }
 }

@@ -33,6 +33,20 @@ public class MultiplexingGenerator implements DocumentGenerator {
         }
     }
 
+    public void startRun() {
+        for (int i = 0; i < generators.size(); i++) {
+            DocumentGenerator generator = (DocumentGenerator) generators.get(i);
+            generator.startRun();
+        }
+    }
+
+    public void endRun() {
+        for (int i = 0; i < generators.size(); i++) {
+            DocumentGenerator generator = (DocumentGenerator) generators.get(i);
+            generator.endRun();
+        }
+    }
+
     public void clear() {
         generators.clear();
     }

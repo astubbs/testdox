@@ -152,7 +152,7 @@ public class GuiTest extends TestCase {
         assertTrue(gui.goButton.isDefaultButton());
     }
 
-    public void testConfiguredDocuemntGeneratorIsAddedToGenerators() throws IOException, InterruptedException {
+    public void testConfiguredDocumentGeneratorIsAddedToGenerators() throws IOException, InterruptedException {
         MockDocumentGenerator testDocumentGenerator = new MockDocumentGenerator();
         JLabel guiComponent = new JLabel();
         MockDocumentGeneratorGui generatorGui = new MockDocumentGeneratorGui(testDocumentGenerator, guiComponent);
@@ -163,7 +163,7 @@ public class GuiTest extends TestCase {
         assertTrue(generatorGui.createDocumentGeneratorWasCalled());
     }
 
-    public void testUnConfiguredDocuemntGeneratorIsNotAddedToGenerators() throws IOException, InterruptedException {
+    public void testUnConfiguredDocumentGeneratorIsNotAddedToGenerators() throws IOException, InterruptedException {
         MockDocumentGenerator testDocumentGenerator = new MockDocumentGenerator();
         JLabel guiComponent = new JLabel();
         MockDocumentGeneratorGui generatorGui = new MockDocumentGeneratorGui(testDocumentGenerator, guiComponent) {
