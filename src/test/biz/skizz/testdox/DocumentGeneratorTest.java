@@ -1,11 +1,10 @@
 package biz.skizz.testdox;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.thoughtworks.qdox.model.JavaClass;
 import junit.framework.TestCase;
 
-import com.thoughtworks.qdox.model.JavaClass;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.

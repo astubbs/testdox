@@ -62,7 +62,7 @@
 
         <dependency>
             <id>qdox</id>
-            <version>1.1</version>
+            <version>1.2</version>
             <jnlp.jar>true</jnlp.jar>
             <dist.jar>true</dist.jar>
         </dependency>

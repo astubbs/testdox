@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<document>
+
+    <properties>
+        <title>TestDox</title>
+        <author email="skizz@sourceforge.net">Chris Stevenson</author>
+    </properties>
+
+    <body>
+
+        <section name="TestDox">
+            <p>TestDox creates simple documentation from the method names in JUnit test cases.</p>
+            <p>For Example, a test class like:
+                <source><![CDATA[public class FooTest extends TestCase {
+    public void testIsASingleton() {}
+    public void testAReallyLongNameIsAGoodThing() {}
+}]]></source>
+                would generate the following :
+                <source><![CDATA[Test
+- is a singleton
+- a really long name is a good thing]]></source>
+            </p>
+        </section>
+
+        <section name="Quick Start">
+            <p>
+            <ul>
+                <li>Download testdox-0.1.jar</li>
+                <li>Run java -jar testdox-0.1.jar [test-directory]</li>
+            </ul>
+            </p>
+            <p>If you leave off test-directory then testdox will pop up a (minimal)
+                gui. Enter the name of a directory or browse to a directory containing
+                test classes and click on the Go button.</p>
+            <p>At the moment, testdox just dumps its output to System.out. </p>
+        </section>
+    </body>
+</document>

@@ -1,9 +1,9 @@
 package biz.skizz.testdox;
 
+import junit.framework.TestCase;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
-
-import junit.framework.TestCase;
 
 
 public class HtmlDocumentGeneratorTest extends TestCase {

@@ -1,12 +1,8 @@
 package biz.skizz.testdox;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.util.List;
-
 import junit.framework.TestCase;
 
-import javax.swing.*;
+import java.util.List;
 
 public class MainTest extends TestCase {
     private MockDocumentGenerator gen;

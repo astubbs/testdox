@@ -1,15 +1,13 @@
 package biz.skizz.testdox;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.MessageFormat;
-
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaMethod;
 import com.thoughtworks.qdox.model.JavaSource;
 
 import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Simple usage:
