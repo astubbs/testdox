@@ -17,9 +17,11 @@ public class ConsoleGenerator implements DocumentGenerator {
 
     public void startClass(String name) {
         out.println(name);
+        out.flush();
     }
     public void onTest(String name) {
         out.println("    - " + name);
+        out.flush();
     }
 
     public void endClass(String name) {
