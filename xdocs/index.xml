@@ -24,16 +24,24 @@
         </section>
 
         <section name="Quick Start">
+
+            <p>The best way to try out testdox is to
+            <a href="http://agiledox.sourceforge.net/testdox.jnlp">run it using webstart</a>
+            </p>
+
             <p>
             <ul>
                 <li>Download testdox-0.1.jar</li>
                 <li>Run java -jar testdox-0.1.jar [test-directory]</li>
             </ul>
             </p>
+
             <p>If you leave off test-directory then testdox will pop up a (minimal)
                 gui. Enter the name of a directory or browse to a directory containing
                 test classes and click on the Go button.</p>
             <p>At the moment, testdox just dumps its output to System.out. </p>
+
         </section>
+
     </body>
 </document>
