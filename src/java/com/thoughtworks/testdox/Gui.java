@@ -11,8 +11,11 @@ import java.awt.HeadlessException;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.Preferences;
+import java.util.prefs.BackingStoreException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -22,6 +25,9 @@ import java.util.List;
  * To change this template use Options | File Templates.
  */
 public class Gui extends JFrame {
+
+    public static String SELECTED_DIRECTORY_KEY = "selectedDirectory";
+    static Preferences prefs = Preferences.userNodeForPackage(Gui.class);
 
     JButton browseButton;
     JButton goButton;
@@ -59,7 +65,17 @@ public class Gui extends JFrame {
         super(title);
         this.gen = gen;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setup();
+        setupGuiComponents();
+        try {
+            prefs.sync();
+            String selectedPath = prefs.get(SELECTED_DIRECTORY_KEY, null);
+            if ( selectedPath!=null) {
+                setSelectedPath(selectedPath);
+            }
+        } catch (BackingStoreException e) {
+            System.err.println("Could not sync preferences");
+            e.printStackTrace();
+        }
     }
 
     private ActionListener goActionListener = new ActionListener() {
@@ -85,7 +101,7 @@ public class Gui extends JFrame {
         }
     };
 
-    private void setup() {
+    private void setupGuiComponents() {
         path = new JTextField(40);
         path.getDocument().addDocumentListener(pathChangeListener);
         browseButton = new JButton("Browse");
@@ -130,8 +146,24 @@ public class Gui extends JFrame {
         }
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         if (fileChooser.showOpenDialog(this) != JFileChooser.CANCEL_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            path.setText(selectedFile.getPath());
+            try {
+                String canonicalPath = fileChooser.getSelectedFile().getCanonicalPath();
+                setSelectedPath(canonicalPath);
+            } catch (IOException e) {
+                System.err.println("Could not locate directory");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void setSelectedPath(String canonicalPath) {
+        try {
+            path.setText(canonicalPath);
+            prefs.put(SELECTED_DIRECTORY_KEY, canonicalPath);
+            prefs.flush();
+        } catch (BackingStoreException e) {
+            System.err.println("Could not flush preferences");
+            e.printStackTrace();
         }
     }
 

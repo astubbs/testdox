@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.prefs.Preferences;
 
 import com.thoughtworks.testdox.Generator;
 import com.thoughtworks.testdox.Gui;
@@ -22,12 +23,19 @@ public class GuiTest extends TestCase {
     private TestGenerator gen;
 
     protected void setUp() throws Exception {
+
+        //Avoid overwriting any of the users real preferences by setting a test set
+        Preferences testPrefs = Preferences.userNodeForPackage(GuiTest.class);
+        Gui.prefs = testPrefs;
+
         gen = new TestGenerator();
         gui = new Gui("foo", gen);
     }
 
     protected void tearDown() throws Exception {
         super.tearDown();
+        Gui.prefs.clear();
+        Gui.prefs.flush();
     }
 
     public void testShowsFileChooserIfBrowseIsClicked() {
@@ -47,17 +55,29 @@ public class GuiTest extends TestCase {
         assertTrue(wasShown[0]);
     }
 
-    public void testSomeGuiDefaults() {
+    public void testExitJvmOnClose() {
         gui = new Gui("foo", gen);
         assertEquals(JFrame.EXIT_ON_CLOSE, gui.getDefaultCloseOperation());
     }
 
-    public void testSelectedFileIsShownInTextField() {
+    public void testSelectedFileIsShownInTextField() throws IOException {
 
         gui.fileChooser = GuiTestUtil.selectSrcChooser;
         gui.browseButton.doClick();
 
-        assertEquals("src", gui.path.getText());
+        assertEquals(GuiTestUtil.selectedFile.getCanonicalPath(), gui.path.getText());
+    }
+
+    public void testSelectedDirectoryIsWrittenToPreferences() throws IOException {
+        gui.fileChooser = GuiTestUtil.selectSrcChooser;
+        gui.browseButton.doClick();
+        assertEquals(GuiTestUtil.selectedFile.getCanonicalPath(), Gui.prefs.get(Gui.SELECTED_DIRECTORY_KEY, null));
+    }
+
+    public void testSelectedDirectoryIsReadFromPreferences() throws IOException {
+        testSelectedDirectoryIsWrittenToPreferences();
+        Gui gui = new Gui("second gui", gen);
+        assertEquals(GuiTestUtil.selectedFile.getCanonicalPath(), gui.path.getText());
     }
 
     public void testSelectedFileIsNotShownIfUserClickedCancel() {
