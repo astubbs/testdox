@@ -58,7 +58,8 @@ public class Gui extends JFrame {
 
     private ActionListener goActionListener = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            gen.generate(new File(path.getText()));
+            gen.setInputFile(new File(path.getText()));
+            gen.generate();
         }
     };
 

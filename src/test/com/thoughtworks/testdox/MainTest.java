@@ -3,6 +3,10 @@ package com.thoughtworks.testdox;
 import junit.framework.TestCase;
 
 import java.util.List;
+import java.io.PrintStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.File;
 
 import com.thoughtworks.testdox.Gui;
 import com.thoughtworks.testdox.Main;
@@ -63,21 +67,10 @@ public class MainTest extends TestCase {
         assertFalse(descriptions.contains("p"));
     }
     
-//    public void testMainShowsUsageIfNoParameters() {
-//    	PrintStream oldErr = System.err;
-//		String result = null;
-//    	try {
-//			ByteArrayOutputStream out = new ByteArrayOutputStream();
-//			System.setErr(new PrintStream(out));
-//			Main.main(new String[]{});
-//			result = out.toString();
-//		}
-//		finally {
-//			System.setErr(oldErr);
-//		}
-//    	assertNotNull(result);
-//    	assertTrue(result.indexOf(Main.class.getName()) >= 0 );
-//    }
+    public void testMainShowsUsageIfCalledWithHelpParameter() {
+        assertContains(runAndRecordSysError(new String[]{"--help"}), "Usage");
+        assertContains(runAndRecordSysError(new String[]{"-h"}), "Usage");
+    }
 
     public void testIfNoArgumentsShowGui() {
         Main.main(new String[] {});
@@ -85,6 +78,38 @@ public class MainTest extends TestCase {
         assertNotNull( frame );
         assertTrue(frame.isVisible());
         assertNotNull(frame.gen);
+    }
+
+    public void testSpecifyTextOutputFile() throws IOException {
+        Main main = new Main();
+        main.processArguments(new String[] {"-txt", "foo.txt", "src"});
+        assertTrue(new File("foo.txt").exists());
+    }
+
+    public void testSpecifyHtmlOutputFile() throws IOException {
+        Main main = new Main();
+        main.processArguments(new String[] {"-html", "foo.html", "src"});
+        assertTrue(new File("foo.html").exists());
+    }
+
+    private void assertContains(String result, String testString) {
+        assertNotNull(result);
+        assertTrue(result.indexOf(testString) >= 0 );
+    }
+
+    private String runAndRecordSysError(String[] args) {
+        PrintStream oldErr = System.err;
+        String result = null;
+        try {
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            System.setErr(new PrintStream(out));
+            Main.main(args);
+            result = out.toString();
+        }
+        finally {
+            System.setErr(oldErr);
+        }
+        return result;
     }
 
 

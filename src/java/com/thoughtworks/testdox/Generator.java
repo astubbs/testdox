@@ -10,5 +10,6 @@ import java.io.File;
  * To change this template use Options | File Templates.
  */
 public interface Generator {
-    void generate(File file);
+    public void setInputFile(File file);
+    public void generate();
 }

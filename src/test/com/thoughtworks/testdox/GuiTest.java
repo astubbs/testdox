@@ -100,8 +100,11 @@ public class GuiTest extends TestCase {
     public static class TestGenerator implements Generator {
         private File file;
 
-        public void generate(File file) {
+        public void setInputFile(File file) {
             this.file = file;
+        }
+
+        public void generate() {
         }
 
         public File getFile() {
@@ -131,7 +134,6 @@ public class GuiTest extends TestCase {
         gui.path.setText(selectedFile.getCanonicalPath());
         assertTrue(gui.goButton.isEnabled());
         assertTrue(gui.goButton.isDefaultButton());
-
     }
 
 }
