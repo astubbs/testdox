@@ -4,6 +4,9 @@ import com.thoughtworks.testdox.DocumentGenerator;
 
 import java.io.PrintWriter;
 
+/**
+ * 2003-08-12 out.flush() added at the request of Mike Mason
+ */
 public class HtmlDocumentGenerator implements DocumentGenerator {
 	PrintWriter out;
 	public HtmlDocumentGenerator(PrintWriter out) {
