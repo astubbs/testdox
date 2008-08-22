@@ -6,7 +6,7 @@ import java.io.PrintStream;
 /**
  * 2003-08-12 out.flush() added at the suggestion of Mike Mason
  */
-public class ConsoleGenerator implements DocumentGenerator {
+public class ConsoleGenerator extends AbstractGenerator {
     private PrintStream out;
 
     public ConsoleGenerator() {
@@ -35,5 +35,16 @@ public class ConsoleGenerator implements DocumentGenerator {
 
     public void endRun() {
 
+    }
+
+    public void startPackage(String name) {
+    	super.startPackage(name);
+        System.out.println("<"+name+">");
+    }
+
+    public void endGeneration() {
+        System.out.println("Total number of test classes: "+getNumberOfTestClasses());
+        System.out.println("Total number of test casses: "+getNumberOfTestCasses());
+        System.out.println("Finished generation...");
     }
 }

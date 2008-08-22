@@ -1,16 +1,16 @@
 package com.thoughtworks.testdox;
 
-import junit.framework.TestCase;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import com.thoughtworks.testdox.HtmlDocumentGenerator;
+import junit.framework.TestCase;
 
-
+/**
+ * TODO Convert tabs to spaces in seperate commit
+ * 
+ */
 public class HtmlDocumentGeneratorTest extends TestCase {
-	
-	
+
 	private StringWriter out;
 
 	private HtmlDocumentGenerator gen;
@@ -20,16 +20,16 @@ public class HtmlDocumentGeneratorTest extends TestCase {
 		out = new StringWriter();
 		gen = new HtmlDocumentGenerator(new PrintWriter(out));
 	}
-	
+
 	public void testShowsHeadingForClass() {
-		gen.startClass("Foo");		
+		gen.startClass("Foo");
 		assertMatches("<h2>Foo</h2>");
 	}
 
 	public void testUnorderedListForMethods() {
-		gen.startClass("Foo");		
-		gen.onTest("ATest");		
-		gen.endClass("Foo");		
+		gen.startClass("Foo");
+		gen.onTest("ATest");
+		gen.endClass("Foo");
 		assertMatches("<ul>");
 		assertMatches("<li>ATest</li>");
 		assertMatches("</ul>");
@@ -37,8 +37,8 @@ public class HtmlDocumentGeneratorTest extends TestCase {
 
 	private void assertMatches(String pattern) {
 		String result = out.toString();
-		if (result.indexOf(pattern)==-1) {
-			fail("Expected " + pattern + " but got " + result); 
+		if (result.indexOf(pattern) == -1) {
+			fail("Expected " + pattern + " but got " + result);
 		}
 	}
 

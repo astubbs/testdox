@@ -1,7 +1,5 @@
 package com.thoughtworks.testdox;
 
-import com.thoughtworks.testdox.DocumentGenerator;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,10 +26,23 @@ public class MockDocumentGenerator implements DocumentGenerator {
         return (List) descriptions.get(className);
     }
 
-    public void startRun() {
+    public void endGeneration() {
+        // TODO Auto-generated method stub
+        
     }
 
     public void endRun() {
+        // TODO Auto-generated method stub
+        
     }
 
+    public void startPackage(String name) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void startRun() {
+        // TODO Auto-generated method stub
+        
+    }
 }

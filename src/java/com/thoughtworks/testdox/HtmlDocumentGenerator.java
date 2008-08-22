@@ -1,36 +1,44 @@
 package com.thoughtworks.testdox;
 
-import com.thoughtworks.testdox.DocumentGenerator;
-
 import java.io.PrintWriter;
 
-/**
- * 2003-08-12 out.flush() added at the suggestion of Mike Mason
- */
-public class HtmlDocumentGenerator implements DocumentGenerator {
-	protected PrintWriter out;
-	public HtmlDocumentGenerator(PrintWriter out) {
-		this.out = out;
-	}
-	public void startClass(String name) {
-		out.println("<h2>" + name + "</h2>");
-		out.println("<ul>");
+public class HtmlDocumentGenerator extends AbstractGenerator {
+    protected PrintWriter out;
+
+    public HtmlDocumentGenerator(PrintWriter out) {
+        this.out = out;
+    }
+
+    public void startPackage(String name) {
+        super.startPackage(name);
+        out.println("<h1>" + name + "</h1>");
+    }
+
+    public void startClass(String name) {
+        super.startClass(name);
+        out.println("<h2>" + name + "</h2>");
+        out.println("<ul>");
         out.flush();
-	}
-	public void endClass(String name) {
-		out.println("</ul>");
+    }
+
+    public void endClass(String name) {
+        out.println("</ul>");
         out.flush();
-	}
+    }
 
     public void onTest(String name) {
-		out.println("<li>" + name + "</li>");
+        super.onTest(name);
+        out.println("<li>" + name + "</li>");
         out.flush();
-	}
-
-    public void startRun() {
     }
 
-    public void endRun() {
+    public void endGeneration() {
+        out
+                .println("Total number of test classes: "
+                        + getNumberOfTestClasses());
+        out.println("Total number of test casses: " + getNumberOfTestCasses());
+        out.flush();
+        out.close();
+        System.out.println("Finished HTML generation...");
     }
-
 }
